@@ -8,4 +8,12 @@ reloadOnUpdate("pages/background");
  */
 reloadOnUpdate("pages/content/style.scss");
 
-console.log("background loaded");
+chrome.browserAction.onClicked.addListener(function (tab) {
+  debugger;
+  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
+    var activeTab = tabs[0];
+    chrome.tabs.sendMessage(activeTab.id, {
+      message: "toggle-action",
+    });
+  });
+});
