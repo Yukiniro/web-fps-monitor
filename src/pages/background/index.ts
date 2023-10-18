@@ -8,12 +8,18 @@ reloadOnUpdate("pages/background");
  */
 reloadOnUpdate("pages/content/style.scss");
 
-chrome.browserAction.onClicked.addListener(function (tab) {
-  debugger;
-  chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-    var activeTab = tabs[0];
-    chrome.tabs.sendMessage(activeTab.id, {
-      message: "toggle-action",
-    });
+chrome.runtime.onInstalled.addListener(() => {
+  chrome.action.setBadgeText({
+    text: "OFF",
   });
+});
+
+chrome.action.onClicked.addListener(async (tab) => {
+  const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
+  const nextState = prevState === "ON" ? "OFF" : "ON";
+  await chrome.action.setBadgeText({
+    tabId: tab.id,
+    text: nextState,
+  });
+  await chrome.tabs.sendMessage(tab.id, { message: "toggle-action" });
 });
