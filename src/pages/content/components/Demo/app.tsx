@@ -1,10 +1,8 @@
-import useFPS from "@root/src/shared/hooks/useFPS";
 import { useEffect, useState } from "react";
+import { FpsView } from "react-fps";
 
 export default function App() {
-  const fps = useFPS();
   const [shown, setShown] = useState(false);
-
   useEffect(() => {
     const fn = function (request) {
       if (request.message === "toggle-action") {
@@ -15,11 +13,5 @@ export default function App() {
     return () => chrome.runtime.onMessage.removeListener(fn);
   }, [shown]);
 
-  return (
-    shown && (
-      <div className="fixed top-0 right-0 w-[120px] h-[60px] bg-white text-black z-[99999999999999] flex items-center justify-center text-3xl opacity-80">
-        {fps} FPS
-      </div>
-    )
-  );
+  return shown && <FpsView left="auto" bottom="auto" right={12} top={12} />;
 }

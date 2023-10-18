@@ -14,6 +14,9 @@ dependencies:
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
+  react-fps:
+    specifier: ^1.0.6
+    version: 1.0.6(react-dom@18.2.0)(react@18.2.0)
 
 devDependencies:
   '@rollup/plugin-typescript':
@@ -4418,6 +4421,16 @@ packages:
       loose-envify: 1.4.0
       react: 18.2.0
       scheduler: 0.23.0
+
+  /react-fps@1.0.6(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-+3PAuADQHD0vwSO/q1QWroSwWH+xS16KVeXmhdjQU4qM8YiI86djOt403CD6UfjchLpUTiGoprU4dGA/4BJsFA==}
+    peerDependencies:
+      react: '>=16.8.1'
+      react-dom: '>=16.8.1'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+    dev: false
 
   /react-is@16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
