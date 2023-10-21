@@ -8,10 +8,20 @@ reloadOnUpdate("pages/background");
  */
 reloadOnUpdate("pages/content/style.scss");
 
-chrome.runtime.onInstalled.addListener(() => {
-  chrome.action.setBadgeText({
-    text: "OFF",
+async function updateStateWithStorage() {
+  const data = await chrome.storage.local.get("isActive");
+  const isActive = !!data?.isActive;
+  await chrome.action.setBadgeText({
+    text: isActive ? "ON" : "OFF",
   });
+}
+
+chrome.runtime.onInstalled.addListener(async () => {
+  await updateStateWithStorage();
+});
+
+chrome.runtime.onStartup.addListener(async () => {
+  await updateStateWithStorage();
 });
 
 chrome.action.onClicked.addListener(async (tab) => {
@@ -21,5 +31,15 @@ chrome.action.onClicked.addListener(async (tab) => {
     tabId: tab.id,
     text: nextState,
   });
-  await chrome.tabs.sendMessage(tab.id, { message: "toggle-action" });
+  const isActive = nextState === "ON" ? true : false;
+  await chrome.tabs.sendMessage(tab.id, {
+    message: isActive ? "shown" : "hidden",
+  });
+  await chrome.storage.local.set({ isActive });
+});
+
+chrome.runtime.onMessage.addListener(async (request) => {
+  if (request.message === "init") {
+    await updateStateWithStorage();
+  }
 });
