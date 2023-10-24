@@ -12,7 +12,7 @@ async function updateStateWithStorage() {
   const data = await chrome.storage.local.get("isActive");
   const isActive = !!data?.isActive;
   await chrome.action.setBadgeText({
-    text: isActive ? "ON" : "OFF",
+    text: isActive ? "ON" : "",
   });
 }
 
@@ -26,10 +26,18 @@ chrome.runtime.onStartup.addListener(async () => {
 
 chrome.action.onClicked.addListener(async (tab) => {
   const prevState = await chrome.action.getBadgeText({ tabId: tab.id });
-  const nextState = prevState === "ON" ? "OFF" : "ON";
+  const nextState = prevState === "ON" ? "" : "ON";
   await chrome.action.setBadgeText({
     tabId: tab.id,
     text: nextState,
+  });
+  await chrome.action.setBadgeTextColor({
+    tabId: tab.id,
+    color: "#ffffff",
+  });
+  await chrome.action.setBadgeBackgroundColor({
+    tabId: tab.id,
+    color: "#1be46c",
   });
   const isActive = nextState === "ON" ? true : false;
   await chrome.tabs.sendMessage(tab.id, {
