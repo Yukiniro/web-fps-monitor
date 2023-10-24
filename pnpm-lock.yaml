@@ -8,6 +8,9 @@ dependencies:
   construct-style-sheets-polyfill:
     specifier: ^3.1.0
     version: 3.1.0
+  fps-react:
+    specifier: ^0.1.6
+    version: 0.1.6(react@18.2.0)
   react:
     specifier: 18.2.0
     version: 18.2.0
@@ -2860,6 +2863,15 @@ packages:
       combined-stream: 1.0.8
       mime-types: 2.1.35
     dev: true
+
+  /fps-react@0.1.6(react@18.2.0):
+    resolution: {integrity: sha512-HayBJoTzNgH1dtvfe+CZmnXziW7BpWot+dKvilp6czGT6g/A4VGzChMuaOTrt8wo/xtoWx4KlCsIXy9Z0MLgdg==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
+    dev: false
 
   /fs-extra@11.1.0:
     resolution: {integrity: sha512-0rcTq621PD5jM/e0a3EJoGC/1TC5ZBCERW82LQuwfGnCa1V8w7dpYH1yNu+SLb6E5dkeCBzKEyLGlFrnr+dUyw==}

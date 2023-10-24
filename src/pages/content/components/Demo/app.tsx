@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FpsView } from "react-fps";
+import { FPSStats } from "fps-react";
 
 export default function App() {
   const [shown, setShown] = useState(false);
@@ -31,5 +31,5 @@ export default function App() {
     })();
   }, []);
 
-  return shown && <FpsView left="auto" bottom="auto" right={12} top={12} />;
+  return shown && <FPSStats left="auto" bottom="auto" right={12} top={12} />;
 }
